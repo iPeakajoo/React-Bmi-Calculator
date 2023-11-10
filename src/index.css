@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  font-family: 'Roboto', sans-serif;
+  background-color: #f5f5f5;
+}
+
+.bt-green {
+  background-color: green;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+}
+.bt-outline {
+  background-color: white;
+  color: green;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid green;
+  cursor: pointer;
+}
+.box{
+  width: 500px;
+}
