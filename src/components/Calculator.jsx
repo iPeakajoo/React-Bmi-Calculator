@@ -41,8 +41,8 @@ const AlertModal = () => {
 const Calculator = () => {
   const [height, setHeight] = useState(0);
   const [weight, setWeight] = useState(0);
-  const [isBackgroundRed, setIsbackgroundRed] = useState(true);
   const [bmiResult, setBmiResult] = useState(0);
+  const [indexList, setIndexList] = useState(0);
 
   const bmiCal = () => {
     const bmi = weight / (((height / 100) * height) / 100);
@@ -56,15 +56,15 @@ const Calculator = () => {
     }
 
     if (bmi < 18.5) {
-      setIsbackgroundRed(false);
+      setIndexList(0);
     } else if (bmi >= 18.5 && bmi <= 22.9) {
-      setIsbackgroundRed(false);
+      setIndexList(1);
     } else if (bmi >= 23 && bmi <= 24.9) {
-      setIsbackgroundRed(true);
+      setIndexList(2);
     } else if (bmi >= 25 && bmi <= 29.9) {
-      setIsbackgroundRed(true);
+      setIndexList(3);
     } else if (bmi >= 30) {
-      setIsbackgroundRed(false);
+      setIndexList(4);
     }
   };
 
@@ -137,33 +137,46 @@ const Calculator = () => {
                 </th>
               </tr>
             </thead>
-
+            <tbody>
             {BmiTable.map((item, index) => {
-              return (
-                <tbody key={index}>
-                  <tr
-                    className="border-b dark:bg-gray-800 dark:border-gray-700 "
-                    style={{
-                      backgroundColor: isBackgroundRed
-                        ? "rgb(31,41,55)"
-                        : "red",
-                    }}
+              return indexList === index ? (
+                <tr
+                  key={index}
+                  className="border-b dark:bg-gray-800 dark:border-gray-700"
+                  style={{
+                    backgroundColor: "#006666" }}
+                >
+                  <th
+                    scope="row"
+                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                   >
-                    <th
-                      scope="row"
-                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                    >
-                      {item.bmi}
-                    </th>
-                    <td className="px-6 py-4">{item.criteria}</td>
-                    <td className="px-6 py-4">{item.risk}</td>
-                  </tr>
-                </tbody>
+                    {item.bmi}
+                  </th>
+                  <td className="px-6 py-4">{item.criteria}</td>
+                  <td className="px-6 py-4">{item.risk}</td>
+                </tr>
+              ) : (
+                <tr
+                  key={index}
+                  className="border-b dark:bg-gray-800 dark:border-gray-700"
+                  style={{ backgroundColor: "" }}
+                >
+                  <th
+                    scope="row"
+                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    {item.bmi}
+                  </th>
+                  <td className="px-6 py-4">{item.criteria}</td>
+                  <td className="px-6 py-4">{item.risk}</td>
+                </tr>
               );
             })}
+            </tbody>
           </table>
         </div>
-      </div>
+      </div>{" "}
+      {/* This is the missing closing div tag */}
     </>
   );
 };
